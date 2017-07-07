@@ -1,0 +1,130 @@
+{
+    "products": [
+    	{
+        "dry_cat_1": {
+            "id": 0,
+            "type": 0,
+            "name": "Wellness CORE Indoor Dry Cat Food",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "dry_cat_2": {
+            "id": 1,
+            "type": 0,
+            "name": "Purina Cat Chow Complete Formula Cat Food",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "dry_cat_3": {
+            "id": 2,
+            "type": 0,
+            "name": "Blue Buffalo Chicken Recipe Adult Cat Food",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "wet_cat_1": {
+            "id": 3,
+            "type": 1,
+            "name": "Pro Plan Focus Urinary Tract Health Canned Cat Food",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "wet_cat_2": {
+            "id": 4,
+            "type": 1,
+            "name": "Fancy Feast Gourmet Cat Food Variety Pack",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "wet_cat_3": {
+            "id": 5,
+            "type": 1,
+            "name": "Soulistic Good Karma Chicken Canned Cat Food in Gravy",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "treat_cat_1": {
+            "id": 6,
+            "type": 2,
+            "name": "Whiskas Temptations Hairball Control Cat Treats",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "treat_cat_2": {
+            "id": 7,
+            "type": 2,
+            "name": "Pro Plan Savory Bites Crunchy Cat Treats",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "treat_cat_3": {
+            "id": 8,
+            "type": 2,
+            "name": "PureBites Freeze Dried Salmon Cat Treats",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      "dry_dog_1": {
+            "id": 9,
+            "type": 3,
+            "name": "Natural Balance L.I.D. Grain-Free Potato & Duck Dog Food",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "dry_dog_2": {
+            "id": 10,
+            "type": 3,
+            "name": "Canidae Grain Free Pure Sea Adult Dog Food",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "dry_dog_3": {
+            "id": 11,
+            "type": 3,
+            "name": "Pro Plan Savor Shredded Blend Small Breed Dog Food",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "wet_dog_1": {
+            "id": 12,
+            "type": 4,
+            "name": "Natural Balance Diets Duck & Potato Formula Canned Dog Food",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "wet_dog_2": {
+            "id": 13,
+            "type": 4,
+            "name": "Hill's Science Diet Chunks & Gravy Adult Canned Dog Food",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "wet_dog_3": {
+            "id": 14,
+            "type": 4,
+            "name": "Blue Buffalo Homestyle Recipe Dinner Canned Dog Food",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "treat_dog_1": {
+            "id": 15,
+            "type": 5,
+            "name": "Blue Buffalo Health Bar Chicken Liver Dog Biscuits",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "treat_dog_2": {
+            "id": 16,
+            "type": 5,
+            "name": "Nutro Crunchy Dog Treats with Real Mixed Berries",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+      {
+        "treat_dog_3": {
+            "id": 17,
+            "type": 5,
+            "name": "Pets on Safari Oven-Baked Duplex Creme Cookies",
+            "description": "ALL NATURAL: Contains only premium, all natural ingredients with no wheat, corn, soy, meat by-products, or artificial colors, flavors and preservatives."
+      },
+    }
+  ]
+}

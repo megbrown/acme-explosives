@@ -1,0 +1,40 @@
+{
+    "types": [
+        {
+            "id": 0,
+            "category": 0,
+            "name": "Dry Food",
+            "description": "Dry food brands for cats"
+        },
+        {
+            "id": 1,
+            "category": 0,
+            "name": "Wet Food",
+            "description": "Wet food brands for cats"
+        },
+        {
+            "id": 2,
+            "category": 0,
+            "name": "Treats",
+            "description": "Treats for cats"
+        },
+        {
+            "id": 3,
+            "category": 1,
+            "name": "Dry Food",
+            "description": "Dry food brands for dogs"
+        },
+        {
+            "id": 4,
+            "category": 1,
+            "name": "Wet Food",
+            "description": "Wet food brands for dogs"
+        },
+        {
+            "id": 5,
+            "category": 1,
+            "name": "Treats",
+            "description": "Treats for dogs"
+        }
+    ]
+}
