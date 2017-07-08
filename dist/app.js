@@ -10,12 +10,22 @@ let catTypeKeyArr = [];
 let dogTypeKeyArr = [];
 let counter = 0;
 
+function assignIDValues(data) {
+	console.log('data', data);
+		let keyIDs = Object.keys(data);
+		console.log('data with key', keyIDs);
+		$.each(categories, function(key, val) {
+			console.log('val.name', val.name);
+		});
+}
+
 let makeProductCard = function() {
 	let domString = "";
+	console.log('categories', categories);
 	if (selectedCat === "catFood"){
 		let catCatVal = Object.keys(categories)[0];
 		domString +=
-			`<h1>Cat Food</h1>`;
+			`<h1>${categories}</h1>`;
 		$.each(types, function(key, val) {
 			if (catCatVal === val.category_id) {
 				catTypeKeyArr.push(key);
@@ -57,6 +67,8 @@ $("select").change( function() {
   getCategories()
   .then( function(dataFromCategories) {
   	categories = dataFromCategories;
+  	console.log('categories', categories);
+  	assignIDValues(categories);
   	return getTypes();
   })
   .then( function(dataFromTypes) {
@@ -65,10 +77,11 @@ $("select").change( function() {
   })
   .then( function(dataFromProducts) {
   	products = dataFromProducts;
+
   	makeProductCard();
   })
   .catch( function(err) {
-  	console.log("Oops, there was an error:", err.statusText);
+  	console.log("Oops, there was an error:", err);
   });
 });
 
