@@ -7,48 +7,45 @@ let products;
 let selectedCat;
 let typeKeyArr = [];
 let typesArr=[];
-// let explosiveTypeKeyArr = [];
 let catString = "";
 let typeString = "";
 let productString = "";
 
-let makeProductCard = function() {
-	if (selectedCat === "Fireworks"){
-		let fireCatVal = Object.keys(categories)[0];
-		sortCategory(fireCatVal);
-		sortTypes(fireCatVal);
-		sortProducts(typeKeyArr, typesArr);
-		$("#productContainer").append(productString);
-	}
-	// else {
-	// 	let expCatArr = Object.keys(categories)[1];
-	// 	$.each(types, function(key, val) {
-	// 		if (expCatArr === val.category_id) {
-	// 			// console.log(val.description);
-	// 			explosiveTypeKeyArr.push(key);
-	// 		}
-	// 	});
-	// 	$.each(products, function(key, val) {
-	// 		if ($.inArray(val.type_id, explosiveTypeKeyArr) !== -1) {
-	// 			// console.log(val.name);
-	// 		}
-	// 	});
-	// }
+let printCard = function(catVal) {
+	$("#productContainer").empty();
+	typeKeyArr = [];
+	typesArr=[];
+	catString = "";
+	typeString = "";
+	productString = "";
+	sortCategory(catVal);
+	sortTypes(catVal);
+	sortProducts(typeKeyArr, typesArr);
+	$("#productContainer").append(`<div class="row">${productString}</div>`);
 };
 
-let sortCategory = function(fireCatVal) {
+let selectCat = function() {
+	if (selectedCat === "Fireworks"){
+		let catVal = Object.keys(categories)[0];
+		printCard(catVal);
+	} else if (selectedCat === "Explosives") {
+		let catVal = Object.keys(categories)[1];
+		printCard(catVal);
+	}
+};
+
+let sortCategory = function(catVal) {
 	$.each(categories, function(key, val) {
-		if (fireCatVal === key) {
-			catString += val.name;
+		if (catVal === key) {
+			catString = val.name;
 		}
 	});
-	console.log(catString);
 	return catString;
 };
 
-let sortTypes = function(fireCatVal) {
+let sortTypes = function(catVal) {
 	$.each(types, function(key, val) {
-		if (fireCatVal === val.category_id) {
+		if (catVal === val.category_id) {
 			typesArr.push({key:key, name:val.name, description:val.description, category_id: val.category_id});
 			typeKeyArr.push(key);
 		}
@@ -56,7 +53,6 @@ let sortTypes = function(fireCatVal) {
 };
 
 let sortProducts = function(typeKeyArr, typesArr) {
-	console.log(typesArr);
 	$.each(products, function(key, val) {
 		let counter = 0;
 		// if (counter % 3 === 0) {
@@ -64,15 +60,17 @@ let sortProducts = function(typeKeyArr, typesArr) {
 		// }
 		if ($.inArray(val.type_id, typeKeyArr) !== -1) {
 			productString +=
-			`<div class="card" id="${counter}">
+			`<div class="col-sm-4">
+			<div class="col-sm-12 card">
+			<div id="${counter}">
 			<h1>${catString}</h1>
 			<h2>${val.name}</h2>
-			<p>${val.description}</p></div>`;
+			<p>${val.description}</p>`;
 			counter += 1;
 		}
 		typesArr.forEach( function(typeObj) {
 			if(typeObj.key === val.type_id) {
-				productString += `<h3>${typeObj.name}</h3>`;
+				productString += `<h3>${typeObj.name}</h3></div></div></div>`;
 			}
 		});
 		// if (counter % 3 === 2) {
@@ -94,7 +92,7 @@ $("select").change( function() {
   })
   .then( function(dataFromProducts) {
   	products = dataFromProducts;
-  	makeProductCard();
+  	selectCat();
   })
   .catch( function(err) {
   	console.log("Oops, there was an error:", err);
