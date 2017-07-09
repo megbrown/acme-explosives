@@ -6,36 +6,46 @@ let categories;
 let types;
 let products;
 let selectedCat;
-let catTypeKeyArr = [];
-let dogTypeKeyArr = [];
+let fireworkTypeKeyArr = [];
+let explosiveTypeKeyArr = [];
 let counter = 0;
 
-function assignIDValues(data) {
-	console.log('data', data);
-		let keyIDs = Object.keys(data);
-		console.log('data with key', keyIDs);
-		$.each(categories, function(key, val) {
-			console.log('val.name', val.name);
-		});
-}
+// function assignIDValues(data) {
+// 	console.log('data', data);
+// 		let keyIDs = Object.keys(data);
+// 		// console.log('data with key', keyIDs);
+// 		$.each(categories, function(key, val) {
+// 			console.log('val.name', val.name);
+// 			if ($.inArray(val.name, keyIDs) !== -1) {
+// 				// selectedCat = val.name
+// 				}
+// 		});
+// 		console.log("select", selectedCat);
+// 		// if (selectedCat === val.name) {
+
+// 		// }
+// }
 
 let makeProductCard = function() {
 	let domString = "";
-	console.log('categories', categories);
-	if (selectedCat === "catFood"){
-		let catCatVal = Object.keys(categories)[0];
-		domString +=
-			`<h1>${categories}</h1>`;
+	if (selectedCat === "Fireworks"){
+		let fireCatVal = Object.keys(categories)[0];
+		$.each(categories, function(key, val) {
+			if (fireCatVal === key) {
+				domString += `<h1>${val.name}</h1>`;
+			}
+		});
 		$.each(types, function(key, val) {
-			if (catCatVal === val.category_id) {
-				catTypeKeyArr.push(key);
+			if (fireCatVal === val.category_id) {
+				fireworkTypeKeyArr.push(key);
+				domString += `<h3>${val.name}</h3>`;
 			}
 		});
 		$.each(products, function(key, val) {
 				if (counter % 3 === 0) {
 					domString += `<div class="row">`;
 				}
-				if ($.inArray(val.type_id, catTypeKeyArr) !== -1) {
+				if ($.inArray(val.type_id, fireworkTypeKeyArr) !== -1) {
 					domString += `<div class="card" id="${counter}"><h2>${val.name}</h2>`;
 					domString += `<p>${val.description}</p></div>`;
 					counter += 1;
@@ -47,16 +57,16 @@ let makeProductCard = function() {
 		$("#productContainer").append(domString);
 }
 	else {
-		let dogCatVal = Object.keys(categories)[1];
+		let expCatArr = Object.keys(categories)[1];
 		$.each(types, function(key, val) {
-			if (dogCatVal === val.category_id) {
-				console.log(val.description);
-				dogTypeKeyArr.push(key);
+			if (expCatArr === val.category_id) {
+				// console.log(val.description);
+				explosiveTypeKeyArr.push(key);
 			}
 		});
 		$.each(products, function(key, val) {
-			if ($.inArray(val.type_id, dogTypeKeyArr) !== -1) {
-				console.log(val.name);
+			if ($.inArray(val.type_id, explosiveTypeKeyArr) !== -1) {
+				// console.log(val.name);
 			}
 		});
 	}
@@ -67,8 +77,8 @@ $("select").change( function() {
   getCategories()
   .then( function(dataFromCategories) {
   	categories = dataFromCategories;
-  	console.log('categories', categories);
-  	assignIDValues(categories);
+  	// console.log('categories', categories);
+  	// assignIDValues(categories);
   	return getTypes();
   })
   .then( function(dataFromTypes) {
