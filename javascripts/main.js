@@ -5,70 +5,80 @@ let categories;
 let types;
 let products;
 let selectedCat;
-let fireworkTypeKeyArr = [];
-let explosiveTypeKeyArr = [];
-let counter = 0;
-
-// function assignIDValues(data) {
-// 	console.log('data', data);
-// 		let keyIDs = Object.keys(data);
-// 		// console.log('data with key', keyIDs);
-// 		$.each(categories, function(key, val) {
-// 			console.log('val.name', val.name);
-// 			if ($.inArray(val.name, keyIDs) !== -1) {
-// 				// selectedCat = val.name
-// 				}
-// 		});
-// 		console.log("select", selectedCat);
-// 		// if (selectedCat === val.name) {
-
-// 		// }
-// }
+let typeKeyArr = [];
+let typesArr=[];
+// let explosiveTypeKeyArr = [];
+let catString = "";
+let typeString = "";
+let productString = "";
 
 let makeProductCard = function() {
-	let domString = "";
 	if (selectedCat === "Fireworks"){
 		let fireCatVal = Object.keys(categories)[0];
-		$.each(categories, function(key, val) {
-			if (fireCatVal === key) {
-				domString += `<h1>${val.name}</h1>`;
-			}
-		});
-		$.each(types, function(key, val) {
-			if (fireCatVal === val.category_id) {
-				fireworkTypeKeyArr.push(key);
-				domString += `<h3>${val.name}</h3>`;
-			}
-		});
-		$.each(products, function(key, val) {
-				if (counter % 3 === 0) {
-					domString += `<div class="row">`;
-				}
-				if ($.inArray(val.type_id, fireworkTypeKeyArr) !== -1) {
-					domString += `<div class="card" id="${counter}"><h2>${val.name}</h2>`;
-					domString += `<p>${val.description}</p></div>`;
-					counter += 1;
-				}
-				if (counter % 3 === 2) {
-					domString += `</div>`;
-				}
-		});
-		$("#productContainer").append(domString);
-}
-	else {
-		let expCatArr = Object.keys(categories)[1];
-		$.each(types, function(key, val) {
-			if (expCatArr === val.category_id) {
-				// console.log(val.description);
-				explosiveTypeKeyArr.push(key);
-			}
-		});
-		$.each(products, function(key, val) {
-			if ($.inArray(val.type_id, explosiveTypeKeyArr) !== -1) {
-				// console.log(val.name);
-			}
-		});
+		sortCategory(fireCatVal);
+		sortTypes(fireCatVal);
+		sortProducts(typeKeyArr, typesArr);
+		$("#productContainer").append(productString);
 	}
+	// else {
+	// 	let expCatArr = Object.keys(categories)[1];
+	// 	$.each(types, function(key, val) {
+	// 		if (expCatArr === val.category_id) {
+	// 			// console.log(val.description);
+	// 			explosiveTypeKeyArr.push(key);
+	// 		}
+	// 	});
+	// 	$.each(products, function(key, val) {
+	// 		if ($.inArray(val.type_id, explosiveTypeKeyArr) !== -1) {
+	// 			// console.log(val.name);
+	// 		}
+	// 	});
+	// }
+};
+
+let sortCategory = function(fireCatVal) {
+	$.each(categories, function(key, val) {
+		if (fireCatVal === key) {
+			catString += val.name;
+		}
+	});
+	console.log(catString);
+	return catString;
+};
+
+let sortTypes = function(fireCatVal) {
+	$.each(types, function(key, val) {
+		if (fireCatVal === val.category_id) {
+			typesArr.push({key:key, name:val.name, description:val.description, category_id: val.category_id});
+			typeKeyArr.push(key);
+		}
+	});
+};
+
+let sortProducts = function(typeKeyArr, typesArr) {
+	console.log(typesArr);
+	$.each(products, function(key, val) {
+		let counter = 0;
+		// if (counter % 3 === 0) {
+		// 	productString += `<div class="row">`;
+		// }
+		if ($.inArray(val.type_id, typeKeyArr) !== -1) {
+			productString +=
+			`<div class="card" id="${counter}">
+			<h1>${catString}</h1>
+			<h2>${val.name}</h2>
+			<p>${val.description}</p></div>`;
+			counter += 1;
+		}
+		typesArr.forEach( function(typeObj) {
+			if(typeObj.key === val.type_id) {
+				productString += `<h3>${typeObj.name}</h3>`;
+			}
+		});
+		// if (counter % 3 === 2) {
+		// 	productString += `</div>`;
+		// }
+	});
 };
 
 $("select").change( function() {
@@ -76,8 +86,6 @@ $("select").change( function() {
   getCategories()
   .then( function(dataFromCategories) {
   	categories = dataFromCategories;
-  	// console.log('categories', categories);
-  	// assignIDValues(categories);
   	return getTypes();
   })
   .then( function(dataFromTypes) {
@@ -86,7 +94,6 @@ $("select").change( function() {
   })
   .then( function(dataFromProducts) {
   	products = dataFromProducts;
-
   	makeProductCard();
   })
   .catch( function(err) {
