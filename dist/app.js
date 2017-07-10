@@ -8,79 +8,9 @@ let products;
 let selectedCat;
 let typeKeyArr = [];
 let typesArr=[];
-// let explosiveTypeKeyArr = [];
 let catString = "";
 let typeString = "";
 let productString = "";
-
-let makeProductCard = function() {
-	if (selectedCat === "Fireworks"){
-		let fireCatVal = Object.keys(categories)[0];
-		sortCategory(fireCatVal);
-		sortTypes(fireCatVal);
-		sortProducts(typeKeyArr, typesArr);
-		$("#productContainer").append(productString);
-	}
-	// else {
-	// 	let expCatArr = Object.keys(categories)[1];
-	// 	$.each(types, function(key, val) {
-	// 		if (expCatArr === val.category_id) {
-	// 			// console.log(val.description);
-	// 			explosiveTypeKeyArr.push(key);
-	// 		}
-	// 	});
-	// 	$.each(products, function(key, val) {
-	// 		if ($.inArray(val.type_id, explosiveTypeKeyArr) !== -1) {
-	// 			// console.log(val.name);
-	// 		}
-	// 	});
-	// }
-};
-
-let sortCategory = function(fireCatVal) {
-	$.each(categories, function(key, val) {
-		if (fireCatVal === key) {
-			catString += val.name;
-		}
-	});
-	console.log(catString);
-	return catString;
-};
-
-let sortTypes = function(fireCatVal) {
-	$.each(types, function(key, val) {
-		if (fireCatVal === val.category_id) {
-			typesArr.push({key:key, name:val.name, description:val.description, category_id: val.category_id});
-			typeKeyArr.push(key);
-		}
-	});
-};
-
-let sortProducts = function(typeKeyArr, typesArr) {
-	console.log(typesArr);
-	$.each(products, function(key, val) {
-		let counter = 0;
-		// if (counter % 3 === 0) {
-		// 	productString += `<div class="row">`;
-		// }
-		if ($.inArray(val.type_id, typeKeyArr) !== -1) {
-			productString +=
-			`<div class="card" id="${counter}">
-			<h1>${catString}</h1>
-			<h2>${val.name}</h2>
-			<p>${val.description}</p></div>`;
-			counter += 1;
-		}
-		typesArr.forEach( function(typeObj) {
-			if(typeObj.key === val.type_id) {
-				productString += `<h3>${typeObj.name}</h3>`;
-			}
-		});
-		// if (counter % 3 === 2) {
-		// 	productString += `</div>`;
-		// }
-	});
-};
 
 $("select").change( function() {
   selectedCat = $(this).val();
@@ -95,7 +25,7 @@ $("select").change( function() {
   })
   .then( function(dataFromProducts) {
   	products = dataFromProducts;
-  	makeProductCard();
+  	selectCat();
   })
   .catch( function(err) {
   	console.log("Oops, there was an error:", err);
@@ -138,6 +68,75 @@ let getProducts = function(dataFromCategories, dataFromTypes) {
 	});
 };
 
+let selectCat = function() {
+	if (selectedCat === "Fireworks"){
+		let catVal = Object.keys(categories)[0];
+		printCard(catVal);
+	} else if (selectedCat === "Explosives") {
+		let catVal = Object.keys(categories)[1];
+		printCard(catVal);
+	}
+};
+
+let printCard = function(catVal) {
+	$("#productContainer").empty();
+	typeKeyArr = [];
+	typesArr=[];
+	catString = "";
+	typeString = "";
+	productString = "";
+	sortCategory(catVal);
+	sortTypes(catVal);
+	printProducts(typeKeyArr, typesArr);
+	$("#productContainer").append(`${productString}`);
+};
+
+let sortCategory = function(catVal) {
+	$.each(categories, function(key, val) {
+		if (catVal === key) {
+			catString = val.name;
+		}
+	});
+	return catString;
+};
+
+let sortTypes = function(catVal) {
+	$.each(types, function(key, val) {
+		if (catVal === val.category_id) {
+			typesArr.push({key:key, name:val.name, description:val.description, category_id: val.category_id});
+			typeKeyArr.push(key);
+		}
+	});
+};
+
+let printProducts = function(typeKeyArr, typesArr) {
+	let counter = 0;
+	$.each(products, function(key, val) {
+		if ($.inArray(val.type_id, typeKeyArr) !== -1) {
+			if (counter === 0) {
+				productString += `<div class="row">`;
+				// counter = 0;
+			}
+			productString +=
+			`<div class="col-sm-4">
+			<div class="col-sm-12 card">
+			<div id="${counter}">
+			<h1>${catString}</h1>
+			<h2>${val.name}</h2>
+			<p>${val.description}</p>`;
+			counter += 1;
+		}
+		typesArr.forEach( function(typeObj) {
+			if(typeObj.key === val.type_id) {
+				productString += `<h3>${typeObj.name}</h3></div></div></div>`;
+			}
+		});
+		if (counter === 3) {
+			productString += `</div>`;
+			counter = 0;
+		}
+	});
+};
 },{"jquery":2}],2:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.2.1
